@@ -21,14 +21,16 @@ jobs:
       with:
         node-version: '14.x'
 
-    - name: npm install
+    - name: npm install, build, and test
       run: |
-        npm install        
+        npm install
+        npm run build --if-present
+        npm run test --if-present
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'nodeBrunoTeste1'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_82e5772bac514b83a491d65103bff9f4 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_58bc8ff3a673479eafbf4cffee3cf79e }}
         package: .
